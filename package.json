@@ -1,7 +1,7 @@
 {
   "name": "expo-crypto",
   "version": "1.0.0",
-  "description": "Basic crypto implementation for expo.",
+  "description": "A minimal and purpsuefully incomplete node-crypto implementation using expo-random",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +11,5 @@
     "expo-random": "^7.0.0"
   },
   "author": "Tom Hacohen <tom@stosb.com> (https://stosb.com)",
-  "license": "ISC"
+  "license": "MIT"
 }
