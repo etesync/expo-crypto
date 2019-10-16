@@ -9,7 +9,7 @@
   "dependencies": {
     "buffer": "^5.4.3",
     "expo-random": "^7.0.0",
-    "sjcl": "git+https://github.com/etesync/sjcl"
+    "rusha": "^0.8.13"
   },
   "author": "Tom Hacohen <tom@stosb.com> (https://stosb.com)",
   "license": "ISC"
