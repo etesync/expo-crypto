@@ -1,5 +1,5 @@
 import * as Random from 'expo-random';
-import * as sjcl from 'sjcl';
+import * as sjcl from './sjcl-mini';
 import { Buffer } from 'buffer';
 
 (async () => {
