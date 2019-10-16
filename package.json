@@ -1,0 +1,16 @@
+{
+  "name": "expo-crypto",
+  "version": "1.0.0",
+  "description": "Basic crypto implementation for expo.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "buffer": "^5.4.3",
+    "expo-random": "^7.0.0",
+    "sjcl": "git+https://github.com/etesync/sjcl"
+  },
+  "author": "Tom Hacohen <tom@stosb.com> (https://stosb.com)",
+  "license": "ISC"
+}
