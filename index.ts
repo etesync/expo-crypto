@@ -1,15 +1,17 @@
 import * as Random from 'expo-random';
+import * as sjcl from 'sjcl';
 import { Buffer } from 'buffer';
-import * as Rusha from 'rusha';
 
 (async () => {
   const entropyBits = 1024;
   const bytes = await Random.getRandomBytesAsync(entropyBits / 8);
   const buf = new Uint32Array(new Uint8Array(bytes).buffer);
+  sjcl.random.addEntropy(buf as any, entropyBits, 'Random.getRandomBytesAsync');
 })();
 
 export function randomBytes(size: number): Buffer {
-  return new Buffer(new Array(size).map(() => 0));
+  const ret = sjcl.random.randomWords(Math.ceil(size / 4));
+  return new Buffer(sjcl.codec.bytes.fromBits(ret));
 }
 export const rng = randomBytes;
 export const pseudoRandomBytes = randomBytes;
@@ -24,15 +26,19 @@ class Sha1Hash implements Hash {
   private hash: any;
 
   constructor() {
-    this.hash = new Rusha.createHash;
+    this.hash = new sjcl.hash.sha1();
   }
 
   public update(data: Buffer) {
-    this.hash.update(data);
+    const bytes = new Uint8Array(data);
+    this.hash.update(sjcl.codec.bytes.toBits(bytes));
   }
 
   public digest(): Buffer {
-    return new Buffer(this.hash.digest());
+    const ret = this.hash.finalize();
+    const bytes = sjcl.codec.bytes.fromBits(ret);
+
+    return new Buffer(bytes);
   }
 }
 
