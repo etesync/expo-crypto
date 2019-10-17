@@ -2,15 +2,19 @@ import * as Random from 'expo-random';
 import * as sjcl from './sjcl-mini';
 import { Buffer } from 'buffer';
 
-(async () => {
-  const entropyBits = 1024;
+async function prngAddEntropy(entropyBits = 1024) {
   const bytes = await Random.getRandomBytesAsync(entropyBits / 8);
   const buf = new Uint32Array(new Uint8Array(bytes).buffer);
   sjcl.random.addEntropy(buf as any, entropyBits, 'Random.getRandomBytesAsync');
-})();
+}
+prngAddEntropy();
 
 export function randomBytes(size: number): Buffer {
   const ret = sjcl.random.randomWords(Math.ceil(size / 4));
+  // We are always aiming for at least level 9 readiness
+  if (sjcl.random.getProgress(9) === 1.0) {
+    prngAddEntropy();
+  }
   return new Buffer(sjcl.codec.bytes.fromBits(ret));
 }
 export const rng = randomBytes;
