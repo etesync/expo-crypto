@@ -1,6 +1,6 @@
 {
   "name": "expo-crypto",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A minimal and purpsuefully incomplete node-crypto implementation using expo-random",
   "main": "index.ts",
   "scripts": {
