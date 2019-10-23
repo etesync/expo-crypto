@@ -1,4 +1,5 @@
 import * as Random from 'expo-random';
+// @ts-ignore: no module declaration for sjcl
 import * as sjcl from './sjcl-mini';
 import { Buffer } from 'buffer';
 
